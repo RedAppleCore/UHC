@@ -1,0 +1,57 @@
+name: MattyUHC
+main: UHC.UHCMainCode
+version: 2.0
+description: >
+             UHC Plugin
+commands:
+   sedate:
+    description: Sedates a player!
+    permission: UHC.sedate
+    permission-message: Permission Denied!
+   unsedate:
+    description: Clue is in the name!
+    permission: UHC.unsedate
+    permission-message: Permission Denied!
+   startuhc:
+    description: Begins the game!
+    permission: UHC.startuhc
+    permission-message: Permission Denied!
+   spec:
+    description: Allows you to spectate a player!
+   sethealth:
+    description: Allows health to be set
+    permission: UHC.sethealth
+    permission-message: Permission Denied!
+   msg:
+    description: Message Command
+   tell:
+    description: Message Command
+   heal:
+    description: Heals the player!
+    permission: UHC.heal
+    permission-message: Permission Denied!
+   slimey:
+    description: A little command for Emilee
+   alive:
+    description: Brings a player back from the dead
+   requestrevive:
+    description: Requests a revival
+   deny:
+    description: Denies a player's revive request
+    
+permissions:
+   UHC.heal:
+    description: Allows use of heal
+    default: op
+   UHC.sethealth:
+    description: Allows use of sethealth
+    default: op
+   UHC.unsedate:
+    description: Allows use of unsedate
+    default: op
+   UHC.sedate:
+    description: Allows use of sedate
+    default: op
+   UHC.startuhc:
+    description: Allows use of startuhc
+    default: op
