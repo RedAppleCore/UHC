@@ -1,9 +1,7 @@
 package UHC;
 
-import com.sk89q.worldedit.Vector;
 import com.sk89q.worldedit.Vector2D;
 import com.sk89q.worldedit.regions.CylinderRegion;
-import com.sk89q.worldedit.regions.CylinderRegionSelector;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -39,7 +37,6 @@ import org.bukkit.event.entity.EntityRegainHealthEvent.RegainReason;
 import org.bukkit.event.entity.EntityTargetEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
@@ -53,7 +50,6 @@ import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.server.ServerListPingEvent;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -63,8 +59,6 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.bukkit.scoreboard.Scoreboard;
-import org.bukkit.scoreboard.Team;
 
 public class UHCMainCode extends JavaPlugin implements Listener {
 
@@ -475,7 +469,7 @@ public class UHCMainCode extends JavaPlugin implements Listener {
                 player.setFlying(true);
                 player.getInventory().clear();
                 World w = e.getPlayer().getLocation().getWorld();
-                Location spawn = new Location(w, 0, 77, 0); //done
+                Location spawn = new Location(w, 0, 100, 0); //done
                 e.getPlayer().teleport(spawn);
             } else {
                 e.setJoinMessage("");
@@ -487,10 +481,10 @@ public class UHCMainCode extends JavaPlugin implements Listener {
             e.getPlayer().setGameMode(GameMode.ADVENTURE);
             World w = e.getPlayer().getLocation().getWorld();
             if (e.getPlayer().getName().equalsIgnoreCase("MattyBainy")) {
-                Location spawn = new Location(w, 1091, 128, -8); //done
+                Location spawn = new Location(w, 379.5, 66, 1167.5); //done
                 e.getPlayer().teleport(spawn);
             } else {
-                Location spawn = new Location(w, 1585.5, 104, -80.5); //done
+                Location spawn = new Location(w, 379.5, 66, 1167.5); //done
                 e.getPlayer().teleport(spawn);
             }
             Bukkit.getServer().broadcastMessage(ChatColor.GRAY + "[" + ChatColor.DARK_AQUA + "UHC" + ChatColor.GRAY + "] " + ChatColor.GOLD + "Player " + ChatColor.AQUA + e.getPlayer().getDisplayName() + ChatColor.GOLD + " has joined UHC!");
@@ -880,7 +874,7 @@ public class UHCMainCode extends JavaPlugin implements Listener {
                         rr.remove(targetPlayer.getName());
                         players.add(targetPlayer.getName());
                         restoreLocation(targetPlayer);
-                        restoreInventory(targetPlayer);
+                        //restoreInventory(targetPlayer);
                         targetPlayer.setHealth(20.0);
                         targetPlayer.setFoodLevel(20);
                         targetPlayer.setGameMode(GameMode.SURVIVAL);
@@ -891,7 +885,7 @@ public class UHCMainCode extends JavaPlugin implements Listener {
                                 pl.showPlayer(targetPlayer);
                             }
                         }
-                        targetPlayer.sendMessage(ChatColor.GRAY + "[" + ChatColor.DARK_AQUA + "UHC" + ChatColor.GRAY + "] " + ChatColor.AQUA + "You have been revived! Your inventory has been restored!");
+                        targetPlayer.sendMessage(ChatColor.GRAY + "[" + ChatColor.DARK_AQUA + "UHC" + ChatColor.GRAY + "] " + ChatColor.AQUA + "You have been revived!");
                         player.sendMessage(ChatColor.GRAY + "[" + ChatColor.DARK_AQUA + "UHC" + ChatColor.GRAY + "] " + ChatColor.GREEN + "Successfully revived " + ChatColor.AQUA + targetPlayer.getName());
                         Bukkit.getServer().broadcastMessage(ChatColor.GRAY + "[" + ChatColor.DARK_AQUA + "UHC" + ChatColor.GRAY + "] " + ChatColor.AQUA + targetPlayer.getName() + ChatColor.GOLD + " has been revived! " + ChatColor.AQUA + players.size() + ChatColor.GOLD + " players remain!");
                     } catch (Exception e) {
