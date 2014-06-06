@@ -380,7 +380,7 @@ public class UHCMainCode extends JavaPlugin implements Listener {
             Player[] playerss = Bukkit.getOnlinePlayers();
             for (Player p : playerss) {
                 if (spec.contains(p.getName())) {
-                    p.sendMessage(ChatColor.DARK_RED + "[DEAD]" + ChatColor.YELLOW + pc.getPlayer().getName() + ChatColor.GRAY + " » " + ChatColor.WHITE + msg);
+                    p.sendMessage(ChatColor.DARK_RED + "DEAD " + ChatColor.YELLOW + pc.getPlayer().getName() + ChatColor.GRAY + " » " + ChatColor.WHITE + msg);
                 }
             }
         } else {
