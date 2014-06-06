@@ -335,7 +335,7 @@ public class UHCMainCode extends JavaPlugin implements Listener {
 
     @EventHandler
     public void onEntityDamageByEntityEvent(EntityDamageByEntityEvent e) {
-        if (e.getEntity() instanceof Player) {
+        if (e.getDamager() instanceof Player) {
             Player d = (Player) e.getDamager();
             if (spec.contains(d.getName())) {
                 e.setCancelled(true);
