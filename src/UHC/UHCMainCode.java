@@ -206,6 +206,7 @@ public class UHCMainCode extends JavaPlugin implements Listener {
                 everyone.hidePlayer(player);
             }
             player.sendMessage(ChatColor.GRAY + "[" + ChatColor.DARK_AQUA + "UHC" + ChatColor.GRAY + "] " + ChatColor.GOLD + "You are now a spectator! Spectate with /spec <player>");
+            player.sendMessage(ChatColor.GRAY + "[" + ChatColor.DARK_AQUA + "UHC" + ChatColor.GRAY + "] " + ChatColor.GOLD + "Bullshit death? Request a revive with /requestrevive <message>");
             player.setGameMode(GameMode.ADVENTURE);
             player.setAllowFlight(true);
             player.setFlying(true);
@@ -453,21 +454,17 @@ public class UHCMainCode extends JavaPlugin implements Listener {
                 player.setAllowFlight(true);
                 player.setFlying(true);
                 player.getInventory().clear();
-                player.setPlayerListName(ChatColor.YELLOW + player.getName());
                 World w = e.getPlayer().getLocation().getWorld();
                 Location spawn = new Location(w, 0, 77, 0); //done
                 e.getPlayer().teleport(spawn);
             } else {
                 e.setJoinMessage("");
-                Player player = e.getPlayer();
-                player.setPlayerListName(ChatColor.YELLOW + player.getName());
             }
         } else {
             e.getPlayer().getInventory().clear();
             players.add(e.getPlayer().getName());
             e.setJoinMessage("");
             e.getPlayer().setGameMode(GameMode.ADVENTURE);
-            e.getPlayer().setPlayerListName(ChatColor.YELLOW + e.getPlayer().getName());
             World w = e.getPlayer().getLocation().getWorld();
             if (e.getPlayer().getName().equalsIgnoreCase("MattyBainy")) {
                 Location spawn = new Location(w, 1091, 128, -8); //done
@@ -825,7 +822,7 @@ public class UHCMainCode extends JavaPlugin implements Listener {
                     for (String s : args) {
                         msg = msg + " " + s;
                     }
-                    Bukkit.getPlayer("MattyBainy").sendMessage(ChatColor.GRAY + "[" + ChatColor.DARK_AQUA + "UHC" + ChatColor.GRAY + "] " + ChatColor.AQUA + "Revive Request(" + player.getName() + ")" + ChatColor.GRAY + " »" + ChatColor.GOLD + msg);
+                    Bukkit.getPlayer("MattyBainy").sendMessage(ChatColor.GRAY + "[" + ChatColor.DARK_AQUA + "UHC" + ChatColor.GRAY + "] " + ChatColor.AQUA + "Revive Request(" + ChatColor.YELLOW + player.getName() + ChatColor.AQUA + ")" + ChatColor.GRAY + " »" + ChatColor.GOLD + msg);
                     rr.add(player.getName());
                 }
             } else {
@@ -913,7 +910,8 @@ public class UHCMainCode extends JavaPlugin implements Listener {
                         p.getInventory().clear();
                         p.setGameMode(GameMode.SURVIVAL);
                     }
-                    Bukkit.dispatchCommand(sender, "spreadplayers 0 0 200 600 true " + pl);
+                    Bukkit.dispatchCommand(sender, "spreadplayers 0 0 200 600 false " + pl);
+                    Bukkit.broadcastMessage(pl);
                     this.getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
                         @Override
                         public void run() {
