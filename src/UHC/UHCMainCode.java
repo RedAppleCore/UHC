@@ -148,6 +148,28 @@ public class UHCMainCode extends JavaPlugin implements Listener {
                 everyone.hidePlayer(player);
             }
             player.setFoodLevel(60);
+        }else{
+            if(player.getName().length() >= 8){
+                if(player.getHealth() <= 20 && player.getHealth() >= 14){
+                    player.setPlayerListName(ChatColor.GREEN + player.getName().substring(0, 7) + " - " + (int) mo.getPlayer().getHealth() / 2);
+                }
+                else if (player.getHealth() <= 13 && player.getHealth() >= 7){
+                    player.setPlayerListName(ChatColor.YELLOW + player.getName().substring(0, 7) + " - " + (int) mo.getPlayer().getHealth() / 2);
+                }
+                else if(player.getHealth() <= 6 && player.getHealth() >= 0){
+                    player.setPlayerListName(ChatColor.RED + player.getName().substring(0, 7) + " - " + (int) mo.getPlayer().getHealth() / 2);
+                }
+            }else{
+                if(player.getHealth() <= 20 && player.getHealth() >= 14){
+                    player.setPlayerListName(ChatColor.GREEN + player.getName() + " - " + (int) mo.getPlayer().getHealth() / 2);
+                }
+                else if (player.getHealth() <= 13 && player.getHealth() >= 7){
+                    player.setPlayerListName(ChatColor.YELLOW + player.getName() + " - " + (int) mo.getPlayer().getHealth() / 2);
+                }
+                else if(player.getHealth() <= 6 && player.getHealth() >= 0){
+                    player.setPlayerListName(ChatColor.RED + player.getName() + " - " + (int) mo.getPlayer().getHealth() / 2);
+                }
+            }
         }
     }
 
