@@ -109,11 +109,6 @@ public class UHCMainCode extends JavaPlugin implements Listener {
             }
         }
 
-        //Location merchant = new Location(Bukkit.getWorld("UHCv2"), 1571.5, 104, -76.5);
-        //Villager shield = (Villager) Bukkit.getWorld("UHCv2").spawnCreature(merchant, EntityType.VILLAGER);
-        //shield.setProfession(Villager.Profession.BUTCHER);
-        //shield.setCustomName(ChatColor.DARK_AQUA + "" + ChatColor.BOLD + "UHC" + ChatColor.RESET + "" + ChatColor.GOLD + "Merchant");
-
         ga = new ItemStack(Material.GOLDEN_APPLE, 1);
         ItemMeta appleMeta = (ItemMeta) ga.getItemMeta();
         appleMeta.setDisplayName(ChatColor.DARK_PURPLE + "Golden Player Head");
@@ -445,18 +440,6 @@ public class UHCMainCode extends JavaPlugin implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerJoinEvent(PlayerJoinEvent e) {
-        if (e.getPlayer().getName().equalsIgnoreCase("clojoblue")) {
-            e.getPlayer().setDisplayName(ChatColor.RED + "C" + ChatColor.GOLD + "l" + ChatColor.YELLOW + "o" + ChatColor.GREEN + "j" + ChatColor.GOLD + "o" + ChatColor.DARK_AQUA + "B" + ChatColor.DARK_PURPLE + "l" + ChatColor.RED + "u" + ChatColor.GOLD + "e");
-        }
-        if (e.getPlayer().getName().equalsIgnoreCase("_girb_")) {
-            e.getPlayer().setDisplayName(ChatColor.RED + "_" + ChatColor.GOLD + "G" + ChatColor.YELLOW + "i" + ChatColor.GREEN + "r" + ChatColor.GOLD + "b" + ChatColor.DARK_AQUA + "_");
-        }
-        if (e.getPlayer().getName().equalsIgnoreCase("pol161998")) {
-            e.getPlayer().setDisplayName(ChatColor.RED + "p" + ChatColor.GOLD + "o" + ChatColor.YELLOW + "l" + ChatColor.GREEN + "1" + ChatColor.GOLD + "6" + ChatColor.DARK_AQUA + "1" + ChatColor.DARK_PURPLE + "9" + ChatColor.RED + "9" + ChatColor.GOLD + "8");
-        }
-        if (e.getPlayer().getName().equalsIgnoreCase("UnexpectedTurn")) {
-            e.getPlayer().setDisplayName(ChatColor.RED + "U" + ChatColor.GOLD + "n" + ChatColor.YELLOW + "e" + ChatColor.GREEN + "x" + ChatColor.GOLD + "p" + ChatColor.DARK_AQUA + "e" + ChatColor.DARK_PURPLE + "c" + ChatColor.RED + "t" + ChatColor.GOLD + "e" + ChatColor.YELLOW + "d" + ChatColor.GREEN + "T" + ChatColor.GOLD + "u" + ChatColor.DARK_AQUA + "r" + ChatColor.DARK_PURPLE + "n");
-        }
         if (ingame == true) {
             if (!players.contains(e.getPlayer().getName())) {
                 e.setJoinMessage("");
@@ -470,17 +453,21 @@ public class UHCMainCode extends JavaPlugin implements Listener {
                 player.setAllowFlight(true);
                 player.setFlying(true);
                 player.getInventory().clear();
+                player.setPlayerListName(ChatColor.YELLOW + player.getName());
                 World w = e.getPlayer().getLocation().getWorld();
                 Location spawn = new Location(w, 0, 77, 0); //done
                 e.getPlayer().teleport(spawn);
             } else {
                 e.setJoinMessage("");
+                Player player = e.getPlayer();
+                player.setPlayerListName(ChatColor.YELLOW + player.getName());
             }
         } else {
             e.getPlayer().getInventory().clear();
             players.add(e.getPlayer().getName());
             e.setJoinMessage("");
             e.getPlayer().setGameMode(GameMode.ADVENTURE);
+            e.getPlayer().setPlayerListName(ChatColor.YELLOW + e.getPlayer().getName());
             World w = e.getPlayer().getLocation().getWorld();
             if (e.getPlayer().getName().equalsIgnoreCase("MattyBainy")) {
                 Location spawn = new Location(w, 1091, 128, -8); //done
