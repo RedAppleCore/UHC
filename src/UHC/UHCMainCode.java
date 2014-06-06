@@ -376,7 +376,7 @@ public class UHCMainCode extends JavaPlugin implements Listener {
     public void onChatEvent(PlayerChatEvent pc) {
         String msg = pc.getMessage();
         pc.setCancelled(true);
-        if (spec.contains(pc.getPlayer().getName())) {
+        if (spec.contains(pc.getPlayer().getName()) && ingame == true) {
             Player[] playerss = Bukkit.getOnlinePlayers();
             for (Player p : playerss) {
                 if (spec.contains(p.getName())) {
