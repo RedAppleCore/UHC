@@ -148,26 +148,22 @@ public class UHCMainCode extends JavaPlugin implements Listener {
                 everyone.hidePlayer(player);
             }
             player.setFoodLevel(60);
-        }else{
-            if(player.getName().length() >= 8){
-                if(player.getHealth() <= 20 && player.getHealth() >= 14){
-                    player.setPlayerListName(ChatColor.GREEN + player.getName().substring(0, 7) + " - " + (int) mo.getPlayer().getHealth() / 2);
+        } else {
+            if (player.getName().length() >= 6) {
+                if (player.getHealth() <= 20 && player.getHealth() >= 14) {
+                    player.setPlayerListName(ChatColor.YELLOW + player.getName().substring(0, 5) + ChatColor.GREEN + " - " + mo.getPlayer().getHealth() / 2);
+                } else if (player.getHealth() <= 13 && player.getHealth() >= 7) {
+                    player.setPlayerListName(ChatColor.YELLOW + player.getName().substring(0, 5) + ChatColor.GOLD + " - " + mo.getPlayer().getHealth() / 2);
+                } else if (player.getHealth() <= 6 && player.getHealth() >= 0) {
+                    player.setPlayerListName(ChatColor.YELLOW + player.getName().substring(0, 5) + ChatColor.RED + " - " + mo.getPlayer().getHealth() / 2);
                 }
-                else if (player.getHealth() <= 13 && player.getHealth() >= 7){
-                    player.setPlayerListName(ChatColor.YELLOW + player.getName().substring(0, 7) + " - " + (int) mo.getPlayer().getHealth() / 2);
-                }
-                else if(player.getHealth() <= 6 && player.getHealth() >= 0){
-                    player.setPlayerListName(ChatColor.RED + player.getName().substring(0, 7) + " - " + (int) mo.getPlayer().getHealth() / 2);
-                }
-            }else{
-                if(player.getHealth() <= 20 && player.getHealth() >= 14){
-                    player.setPlayerListName(ChatColor.GREEN + player.getName() + " - " + (int) mo.getPlayer().getHealth() / 2);
-                }
-                else if (player.getHealth() <= 13 && player.getHealth() >= 7){
-                    player.setPlayerListName(ChatColor.YELLOW + player.getName() + " - " + (int) mo.getPlayer().getHealth() / 2);
-                }
-                else if(player.getHealth() <= 6 && player.getHealth() >= 0){
-                    player.setPlayerListName(ChatColor.RED + player.getName() + " - " + (int) mo.getPlayer().getHealth() / 2);
+            } else {
+                if (player.getHealth() <= 20 && player.getHealth() >= 14) {
+                    player.setPlayerListName(ChatColor.YELLOW + player.getName() + ChatColor.GREEN + " - " + mo.getPlayer().getHealth() / 2);
+                } else if (player.getHealth() <= 13 && player.getHealth() >= 7) {
+                    player.setPlayerListName(ChatColor.YELLOW + player.getName() + ChatColor.GOLD + " - " + mo.getPlayer().getHealth() / 2);
+                } else if (player.getHealth() <= 6 && player.getHealth() >= 0) {
+                    player.setPlayerListName(ChatColor.YELLOW + player.getName() + ChatColor.RED + " - " + mo.getPlayer().getHealth() / 2);
                 }
             }
         }
@@ -339,9 +335,11 @@ public class UHCMainCode extends JavaPlugin implements Listener {
 
     @EventHandler
     public void onEntityDamageByEntityEvent(EntityDamageByEntityEvent e) {
-        Player d = (Player) e.getDamager();
-        if (spec.contains(d.getName())) {
-            e.setCancelled(true);
+        if (e.getEntity() instanceof Player) {
+            Player d = (Player) e.getDamager();
+            if (spec.contains(d.getName())) {
+                e.setCancelled(true);
+            }
         }
         if (ingame == false) {
             e.setCancelled(true);
@@ -832,27 +830,27 @@ public class UHCMainCode extends JavaPlugin implements Listener {
 
         if (commandLabel.equalsIgnoreCase("requestrevive")) {
             Player player = (Player) sender;
-            if(rr.contains(player.getName())){
+            if (rr.contains(player.getName())) {
                 player.sendMessage(ChatColor.GRAY + "[" + ChatColor.DARK_AQUA + "UHC" + ChatColor.GRAY + "] " + ChatColor.AQUA + "You've already requested to be revived!");
-            }else{
-            if (spec.contains(player.getName())) {
-                if (args.length == 0) {
-                    player.sendMessage(ChatColor.GRAY + "[" + ChatColor.DARK_AQUA + "UHC" + ChatColor.GRAY + "] " + ChatColor.RED + "Usage /requestrevive [message]");
-                } else {
-                    player.sendMessage(ChatColor.GRAY + "[" + ChatColor.DARK_AQUA + "UHC" + ChatColor.GRAY + "] " + ChatColor.AQUA + "Request Sent!");
-                    String msg = "";
-                    for (String s : args) {
-                        msg = msg + " " + s;
-                    }
-                    Bukkit.getPlayer("MattyBainy").sendMessage(ChatColor.GRAY + "[" + ChatColor.DARK_AQUA + "UHC" + ChatColor.GRAY + "] " + ChatColor.AQUA + "Revive Request(" + ChatColor.YELLOW + player.getName() + ChatColor.AQUA + ")" + ChatColor.GRAY + " »" + ChatColor.GOLD + msg);
-                    rr.add(player.getName());
-                }
             } else {
-                player.sendMessage(ChatColor.GRAY + "[" + ChatColor.DARK_AQUA + "UHC" + ChatColor.GRAY + "] " + ChatColor.AQUA + "You must be dead to use this command.");
+                if (spec.contains(player.getName())) {
+                    if (args.length == 0) {
+                        player.sendMessage(ChatColor.GRAY + "[" + ChatColor.DARK_AQUA + "UHC" + ChatColor.GRAY + "] " + ChatColor.RED + "Usage /requestrevive [message]");
+                    } else {
+                        player.sendMessage(ChatColor.GRAY + "[" + ChatColor.DARK_AQUA + "UHC" + ChatColor.GRAY + "] " + ChatColor.AQUA + "Request Sent!");
+                        String msg = "";
+                        for (String s : args) {
+                            msg = msg + " " + s;
+                        }
+                        Bukkit.getPlayer("MattyBainy").sendMessage(ChatColor.GRAY + "[" + ChatColor.DARK_AQUA + "UHC" + ChatColor.GRAY + "] " + ChatColor.AQUA + "Revive Request(" + ChatColor.YELLOW + player.getName() + ChatColor.AQUA + ")" + ChatColor.GRAY + " »" + ChatColor.GOLD + msg);
+                        rr.add(player.getName());
+                    }
+                } else {
+                    player.sendMessage(ChatColor.GRAY + "[" + ChatColor.DARK_AQUA + "UHC" + ChatColor.GRAY + "] " + ChatColor.AQUA + "You must be dead to use this command.");
+                }
             }
         }
-        }
-        
+
         if (commandLabel.equalsIgnoreCase("deny")) {
             Player player = (Player) sender;
             if (player.getName().equals("MattyBainy")) {
@@ -888,8 +886,8 @@ public class UHCMainCode extends JavaPlugin implements Listener {
                         targetPlayer.setGameMode(GameMode.SURVIVAL);
                         targetPlayer.setFlying(false);
                         Player[] playerarray = Bukkit.getServer().getOnlinePlayers();
-                        for(Player pl : playerarray){
-                            if(pl.canSee(targetPlayer) == false){
+                        for (Player pl : playerarray) {
+                            if (pl.canSee(targetPlayer) == false) {
                                 pl.showPlayer(targetPlayer);
                             }
                         }
@@ -1081,8 +1079,8 @@ public class UHCMainCode extends JavaPlugin implements Listener {
             double x = l.getX();
             double y = l.getY();
             double z = l.getZ();
-            Vector2D v1 = new Vector2D(x,z);
-            Vector2D v2 = new Vector2D(10,10); 
+            Vector2D v1 = new Vector2D(x, z);
+            Vector2D v2 = new Vector2D(10, 10);
             cr.setCenter(v1);
             cr.setRadius(v2);
             cr.setMaximumY(256);
