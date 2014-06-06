@@ -907,6 +907,7 @@ public class UHCMainCode extends JavaPlugin implements Listener {
                     String pl = "";
                     Player[] playe = Bukkit.getServer().getOnlinePlayers();
                     for (World w : getServer().getWorlds()) {
+                        w.setTime(0L);
                         for (Chunk c : w.getLoadedChunks()) {
                             for (Entity e : c.getEntities()) {
                                 if (e.getType() == EntityType.SLIME) {
