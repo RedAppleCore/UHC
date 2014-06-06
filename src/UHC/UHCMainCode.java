@@ -887,6 +887,7 @@ public class UHCMainCode extends JavaPlugin implements Listener {
         if (commandLabel.equalsIgnoreCase("startuhc")) {
             if (args.length == 0) {
                 if (ingame == false) {
+                    String pl = "";
                     Player[] playe = Bukkit.getServer().getOnlinePlayers();
                     for (World w : getServer().getWorlds()) {
                         for (Chunk c : w.getLoadedChunks()) {
@@ -898,6 +899,7 @@ public class UHCMainCode extends JavaPlugin implements Listener {
                         }
                     }
                     for (Player p : playe) {
+                        pl = pl + " " + p.getName();
                         p.setHealth(20.0);
                         p.setFoodLevel(60);
                         PotionEffect blind = new PotionEffect(PotionEffectType.BLINDNESS, 99999, 128);
@@ -911,6 +913,7 @@ public class UHCMainCode extends JavaPlugin implements Listener {
                         p.getInventory().clear();
                         p.setGameMode(GameMode.SURVIVAL);
                     }
+                    Bukkit.dispatchCommand(sender, "spreadplayers 0 0 200 600 true " + pl);
                     this.getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
                         @Override
                         public void run() {
