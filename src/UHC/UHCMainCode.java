@@ -911,7 +911,6 @@ public class UHCMainCode extends JavaPlugin implements Listener {
                         p.setGameMode(GameMode.SURVIVAL);
                     }
                     Bukkit.dispatchCommand(sender, "spreadplayers 0 0 200 600 false " + pl);
-                    Bukkit.broadcastMessage(pl);
                     this.getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
                         @Override
                         public void run() {
